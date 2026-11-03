@@ -16,10 +16,13 @@ INPUT = REPO / "testImages" / "Mito_Cropped.tif"
 OUTPUT = REPO / "testImages" / "Mito_template.tif"
 
 # The center of the piece (row, column) and how far it extends on each side.
-# This spot is a single, small, round mitochondrion below and to the right of
-# the nucleus.  A half-width of 5 gives an 11 x 11 pixel piece.
-CENTER_ROW, CENTER_COL = 225, 172
-HALF_WIDTH = 5
+# This spot is a single, squiggly mitochondrion near the top of the image.
+# A half-width of 9 gives a 19 x 19 pixel piece: big enough to hold the whole
+# squiggle, so it is not mistaken for other short bits of mitochondria.
+# Careful: Fiji shows positions as (x, y) = (column, row), but numpy wants
+# (row, column).  So Fiji's x=144, y=37 is row 37, column 144 here.
+CENTER_ROW, CENTER_COL = 37, 144
+HALF_WIDTH = 9
 
 with tifffile.TiffFile(INPUT) as tif:
     image = tif.asarray()
